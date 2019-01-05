@@ -29,27 +29,48 @@ export const controllers = {
 }
 
 export const createOne = (model) => (req, res, next) => {
-
+  return controllers.createOne(model, req.body)
+    .then(doc => res.status(201).json(doc))
+    .catch(e => next(e))
 }
 
 export const updateOne = (model) => async (req, res, next) => {
+  const docToUpdate = req.docFromId
+  const update = req.body
 
+  return controllers.updateOne(docToUpdate, update)
+    .then(doc => res.status(200).json(doc))
+    .catch(e => next(e))
 }
 
 export const deleteOne = (model) => (req, res, next) => {
-
+  return controllers.deleteOne(req.docFromId)
+    .then(doc => res.status(201).json(doc))
+    .catch(e => next(e))
 }
 
 export const getOne = (model) => (req, res, next) => {
-
+  return controllers.getOne(model, req.docFromId)
+    .then(doc => res.status(200).json(doc))
+    .catch(e => next(e))
 }
 
 export const getAll = (model) => (req, res, next) => {
-
+  return controllers.getAll(model)
+  .then(docs => res.json(docs))
+  .catch(e => next(e))
 }
 
 export const findByParam = (model) => (req, res, next, id) => {
-  
+  return controllers.findByParam(model, id)
+    .then(doc => {
+      if (!doc) {
+        next(Error('Not Found'))
+      } else {
+        req.docFromId = doc
+        next()
+      }
+    }).catch(e => next(e))
 }
 
 

@@ -5,11 +5,11 @@ export const userRouter = express.Router()
 
 userRouter.param('id', userController.findByParam)
 
-userRouter.route('/')
+userRouter.route('/user')
   .get(userController.getAll)
   .post(userController.createOne)
 
 userRouter.route('/:id')
   .get(userController.getOne)
   .put(userController.updateOne)
-  .delete(userController.createOne)
+  .delete(userController.deleteOne)

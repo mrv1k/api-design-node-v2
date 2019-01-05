@@ -5,11 +5,11 @@ export const playlistRouter = express.Router()
 
 playlistRouter.param('id', playlistController.findByParam)
 
-playlistRouter.route('/')
+playlistRouter.route('/playlist')
   .get(playlistController.getAll)
   .post(playlistController.createOne)
 
 playlistRouter.route('/:id')
   .get(playlistController.getOne)
   .put(playlistController.updateOne)
-  .delete(playlistController.createOne)
+  .delete(playlistController.deleteOne)
