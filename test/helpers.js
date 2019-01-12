@@ -22,7 +22,7 @@ export const removeModel = (modelName) => {
 }
 
 export const dropDb = () => {
-  return mongoose.connect('mongodb://localhost/jams-test', {
+  return mongoose.connect(config.dbUrl, {
     useMongoClient: true
   })
     .then(() => Promise.all(mongoose.modelNames().map(removeModel)))
